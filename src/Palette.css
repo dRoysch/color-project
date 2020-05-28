@@ -4,3 +4,31 @@
 .Palette-colors {
     height: 90%;
 }
+
+.slider {
+    width: 340px;
+    margin: 0 10px;
+    display: inline-block;
+}
+
+
+.rc-slider-track {
+    background-color: transparent;
+}
+
+.rc-slider-rail{
+    height: 8px;
+}
+
+.rc-slider-handle,
+.rc-slider-handle:focus,
+.rc-slider-handle:active,
+.rc-slider-handle:hover {
+    background-color: black;
+    outline: none;
+    border: 2px solid blue;
+    box-shadow: none;
+    width: 15px;
+    height: 15px;
+    margin-top: -5px;
+}
