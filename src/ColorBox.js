@@ -6,7 +6,7 @@ import './ColorBox.css';
 export default class ColorBox extends Component {
     constructor(props){
         super(props);
-        this.state= {copied: false};
+        this.state = {copied: false};
         this.changeCopyState = this.changeCopyState.bind(this);
     }
     changeCopyState(){
@@ -18,7 +18,7 @@ export default class ColorBox extends Component {
         const { background, name, paletteId, id, showLink } = this.props;
         const { copied } = this.state;
         return (
-            <CopyToClipboard text={name} onCopy={this.changeCopyState}>
+            <CopyToClipboard text={background} onCopy={this.changeCopyState}>
             <div style={{ background }} className='ColorBox'>
             <div style={{ background }} className={`copy-overlay ${copied && 'show'}`} 
             />
