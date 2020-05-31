@@ -59,7 +59,7 @@
     color: white;
 }
 
-.see-more{
+/* .see-more{
     background: rgba(255, 255, 255, 0.3);
     position: absolute;
     border: none;
@@ -72,10 +72,10 @@
     height: 30px;
     text-align: center;
     line-height: 30px;
-}
-.ColorBox .light-see {
+} */
+/* .ColorBox .light-see {
     color: rgba(0, 0, 0, 0.6);
-}
+} */
 
 .copy-overlay{
     opacity: 0;
