@@ -19,9 +19,9 @@ class DraggableColorBox extends Component {
     render() {
         return (
             <div 
-            style={{backgroundColor: this.props.colorName}}
+            style={{backgroundColor: this.props.color}}
             className={this.props.classes.root}>
-                {this.props.colorName}
+                {this.props.name}
             </div>
         )
     }
