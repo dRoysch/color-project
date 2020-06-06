@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {ChromePicker} from 'react-color';
 import Button from '@material-ui/core/Button'
+import DraggableColorBox from './DraggableColorBox.js'
 
 export default class NewColorForm extends Component {
     constructor(props) {
@@ -46,11 +47,11 @@ export default class NewColorForm extends Component {
                 >
                     Add Color
                 </Button>
-                <ul>
-                    {this.state.colors.map(color => (
-                    <li style={{backgroundColor: color}}>{color}</li>
-                ))}
-                </ul>
+                {
+                    this.state.colors.map(color=>(
+                        <DraggableColorBox colorName={color}/>
+                    ))
+                }
             </div>
         )
     }
