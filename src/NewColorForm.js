@@ -81,11 +81,6 @@ export default class NewColorForm extends Component {
                         Add Color
                     </Button> 
                 </ValidatorForm> 
-                {
-                    this.state.colors.map(color=>(
-                        <DraggableColorBox color={color.color} name={color.name}/>
-                    ))
-                }
             </div>
         )
     }

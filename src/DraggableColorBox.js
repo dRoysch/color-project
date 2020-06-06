@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/styles';
 const styles = {
     root: {
     width: '20%',
-    height: props => (props.showingFullPalette ? '25%' : '50%'),
+    height: '25%',
     margin: '0 auto',
     display: 'inline-block',
     position: 'relative',
