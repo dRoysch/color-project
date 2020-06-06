@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
+import NewColorForm from './NewColorForm.js'
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -12,7 +13,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
 
-const drawerWidth = 240;
+const drawerWidth = 400;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -122,6 +123,8 @@ export default function PersistentDrawerLeft() {
           </IconButton>
         </div>
         <Divider />
+        <Typography variante='h4'>Design Your Palette</Typography>
+        <NewColorForm />
       </Drawer>
       <main
         className={clsx(classes.content, {
