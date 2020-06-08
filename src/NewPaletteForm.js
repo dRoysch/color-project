@@ -1,9 +1,8 @@
 import React from 'react'
-// import NewColorForm from './NewColorForm.js';
 import {ChromePicker} from 'react-color';
 import Button from '@material-ui/core/Button'
-import DraggableColorBox from './DraggableColorBox.js'
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import DraggableColorList from './DraggableColorList.js';
 
 
 import PropTypes from 'prop-types';
@@ -17,8 +16,8 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+
+import {arrayMove} from 'react-sortable-hoc';
 
 const drawerWidth = 400;
 
@@ -93,6 +92,7 @@ class PersistentDrawerLeft extends React.Component {
         this.addNewColor = this.addNewColor.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.removeColor = this.removeColor.bind(this);
     }
     componentDidMount() {
         // Name unique
@@ -158,6 +158,13 @@ class PersistentDrawerLeft extends React.Component {
       colors: this.state.colors.filter(color => color.name  !== colorName)
     })
   }
+
+  onSortEnd = ({oldIndex, newIndex}) => {
+    this.setState(({colors}) => ({
+      colors: arrayMove(colors, oldIndex, newIndex),
+    }));
+  };
+
   render() {
     const { classes, theme } = this.props;
     const { open } = this.state;
@@ -266,17 +273,12 @@ class PersistentDrawerLeft extends React.Component {
           })}
         >
           <div className={classes.drawerHeader} />
-
-          {
-                    this.state.colors.map(color=>(
-                        <DraggableColorBox 
-                        key={color.name}
-                        color={color.color} 
-                        name={color.name}
-                        handleClick={()=> this.removeColor(color.name)}
-                        />
-                    ))
-            }
+          <DraggableColorList 
+          colors={this.state.colors}
+          removeColor={this.removeColor}
+          axis='xy'
+          onSortEnd={this.onSortEnd}
+          />
         </main>
       </div>
     );
