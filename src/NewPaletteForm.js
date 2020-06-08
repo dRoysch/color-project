@@ -160,6 +160,7 @@ class PersistentDrawerLeft extends React.Component {
       <div className={classes.root}>
         <CssBaseline />
         <AppBar
+          color="inherit"
           position="fixed"
           className={classNames(classes.appBar, {
             [classes.appBarShift]: open,
@@ -206,11 +207,6 @@ class PersistentDrawerLeft extends React.Component {
             paper: classes.drawerPaper,
           }}
         >
-          <div className={classes.drawerHeader}>
-            <IconButton onClick={this.handleDrawerClose}>
-              {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-            </IconButton>
-          </div>
           <Divider />
 {/*  
 
