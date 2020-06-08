@@ -28,7 +28,11 @@ class App extends Component {
       <Route
       exact
       path='/palette/new'
-      render={(routeProps)=> <NewPaletteForm savePalette={this.savePalette} {...routeProps}/>}
+      render={(routeProps)=> 
+      <NewPaletteForm 
+      savePalette={this.savePalette} 
+      palettes={this.state.palettes}
+      {...routeProps}/>}
       />
       <Route 
       exact 
@@ -57,10 +61,6 @@ class App extends Component {
       />}
       />
     </Switch>
-
-    // <div className="App">
-    //   <Palette palette={generatePalette(seedPalette[4])}/>
-    // </div>
   );
 }
 }
