@@ -13,18 +13,12 @@ import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 
 const drawerWidth = 400;
 
@@ -97,6 +91,7 @@ class PersistentDrawerLeft extends React.Component {
         this.updateCurrentColor = this.updateCurrentColor.bind(this);
         this.addNewColor = this.addNewColor.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
     componentDidMount() {
         // Name unique
@@ -113,6 +108,16 @@ class PersistentDrawerLeft extends React.Component {
     );
     }
 
+    handleSubmit() {
+      const newName = 'New Test Palette';
+      const newPalette = {
+        paletteName: newName,
+        id: newName.toLowerCase().replace(/ /g, '-'), 
+        colors: this.state.colors
+      }
+        this.props.savePalette(newPalette);
+        this.props.history.push('/')
+    }
 
     updateCurrentColor(newColor) {
         // console.log(newColor);
@@ -164,6 +169,11 @@ class PersistentDrawerLeft extends React.Component {
             <Typography variant="h6" color="inherit" noWrap>
               Persistent drawer
             </Typography>
+            <Button
+            variant='contained'
+            color='secondary'
+            onClick={this.handleSubmit}
+            >Save Palette</Button>
           </Toolbar>
         </AppBar>
         <Drawer
