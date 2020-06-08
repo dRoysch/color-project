@@ -152,6 +152,12 @@ class PersistentDrawerLeft extends React.Component {
     this.setState({ open: false });
   };
 
+  // Esta funcion es para pasarsela a DraggableColorBox
+  removeColor(colorName){
+    this.setState({
+      colors: this.state.colors.filter(color => color.name  !== colorName)
+    })
+  }
   render() {
     const { classes, theme } = this.props;
     const { open } = this.state;
@@ -263,7 +269,12 @@ class PersistentDrawerLeft extends React.Component {
 
           {
                     this.state.colors.map(color=>(
-                        <DraggableColorBox color={color.color} name={color.name}/>
+                        <DraggableColorBox 
+                        key={color.name}
+                        color={color.color} 
+                        name={color.name}
+                        handleClick={()=> this.removeColor(color.name)}
+                        />
                     ))
             }
         </main>
