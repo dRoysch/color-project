@@ -80,12 +80,15 @@ const styles = theme => ({
 });
 
 class PersistentDrawerLeft extends React.Component {
+  static defaultProps = {
+    maxColors: 20
+  };
     constructor(props) {
         super(props);
         this.state= {
             currentColor: 'teal',
             newColorName: '',
-            colors: [],
+            colors: this.props.palettes[0].colors,
             newPaletteName: ''
         }
         this.updateCurrentColor = this.updateCurrentColor.bind(this);
@@ -93,6 +96,8 @@ class PersistentDrawerLeft extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.removeColor = this.removeColor.bind(this);
+        this.clearColors = this.clearColors.bind(this);
+        this.addRandomColor = this.addRandomColor.bind(this);
     }
     componentDidMount() {
         // Name unique
@@ -165,9 +170,23 @@ class PersistentDrawerLeft extends React.Component {
     }));
   };
 
+  clearColors(){
+    return this.setState({colors: []});
+  }
+
+  addRandomColor() {
+    const allColors = this.props.palettes.map(p => p.colors).flat();
+    var rand = Math.floor(Math.random() * allColors.length);
+    const randomColor = allColors[rand];
+    this.setState({colors: [...this.state.colors, randomColor]});
+    }
+
+
   render() {
-    const { classes, theme } = this.props;
-    const { open } = this.state;
+    const { classes, maxColors } = this.props;
+    const { open, colors } = this.state;
+    const paletteIsFull = colors.length >= maxColors;
+
 
     return (
       <div className={classes.root}>
@@ -231,11 +250,18 @@ class PersistentDrawerLeft extends React.Component {
           <div>
                 <h1>HELLLOOOOO</h1>
                 <div>
-                <Button variant='contained' color='primary'>
+                <Button 
+                variant='contained' 
+                color='primary' 
+                onClick={this.clearColors}>
                     Clear Palette
                 </Button>
-                <Button variant='contained' color='primary'>
-                    Random Color
+                <Button 
+                variant='contained' 
+                color='primary' 
+                onClick={this.addRandomColor}
+                disabled={paletteIsFull}>
+                    {paletteIsFull ? 'Palette Full':'Random Color'}
                 </Button>
                 </div>
                 <ChromePicker
@@ -256,8 +282,9 @@ class PersistentDrawerLeft extends React.Component {
                     style={{backgroundColor: this.state.currentColor}}
                     // onClick={this.addNewColor}
                     type='submit'
+                    disabled={paletteIsFull}
                     >
-                        Add Color
+                        {paletteIsFull ? 'Palette Full':'Add Color'}
                     </Button> 
                 </ValidatorForm> 
             </div>
@@ -274,6 +301,8 @@ class PersistentDrawerLeft extends React.Component {
         >
           <div className={classes.drawerHeader} />
           <DraggableColorList 
+          // pressDelay={100} // pressDalay y distance no pueden estar activos al mismo tiempo https://github.com/clauderic/react-sortable-hoc
+          distance={2}
           colors={this.state.colors}
           removeColor={this.removeColor}
           axis='xy'
