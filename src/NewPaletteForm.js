@@ -1,10 +1,8 @@
 import React from 'react'
-import {ChromePicker} from 'react-color';
 import Button from '@material-ui/core/Button'
-import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import DraggableColorList from './DraggableColorList.js';
 import PaletteFormNav from './PaletteFormNav.js'
-
+import ColorPickerForm from './ColorPickerForm.js';
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -84,11 +82,9 @@ class PersistentDrawerLeft extends React.Component {
     constructor(props) {
         super(props);
         this.state= {
-            currentColor: 'teal',
             newColorName: '',
             colors: this.props.palettes[0].colors
         }
-        this.updateCurrentColor = this.updateCurrentColor.bind(this);
         this.addNewColor = this.addNewColor.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -96,20 +92,10 @@ class PersistentDrawerLeft extends React.Component {
         this.clearColors = this.clearColors.bind(this);
         this.addRandomColor = this.addRandomColor.bind(this);
     }
-    componentDidMount() {
-        // Name unique
-        ValidatorForm.addValidationRule('isColorNameUnique', value =>
-            this.state.colors.every(
-                ({name}) => name.toLowerCase() !== value.toLowerCase() 
-                )
-        );
-        //Color unique
-        ValidatorForm.addValidationRule('isColorUnique', value =>
-        this.state.colors.every(
-            ({color}) => color !== this.state.currentColor
-            )
-    );
-    }
+    //Este componentDidMount esta asociado al ForValidator de ColorPickerFor.js, sin embargo,
+    //al colocar el componentDidMount en ese archivo da error porque no reconoce this.state.colors,
+    //por eso lo dejo acá
+  
 
     handleSubmit(newPaletteName) {
       const newPalette = {
@@ -121,14 +107,7 @@ class PersistentDrawerLeft extends React.Component {
         this.props.history.push('/')
     }
 
-    updateCurrentColor(newColor) {
-        // console.log(newColor);
-        this.setState({
-            currentColor: newColor.hex
-        })
-    }
-    addNewColor(){
-        const newColor = {color: this.state.currentColor, name: this.state.newColorName}
+    addNewColor(newColor){
         this.setState({colors: [...this.state.colors, newColor], newColorName: ''})
     }
 
@@ -206,8 +185,8 @@ class PersistentDrawerLeft extends React.Component {
 
 {/*  
 
- PORQUE DESABILITE EL NEWCOLORFORM, YA QUE QUE EN LA VERSION ANTERIOR NEWPALETTEFORM ERA UNA FUNCION, 
- AHORA ES UNA CLASE, DE TODAS FORMAS MAS ADELANTA UTILIZARE NEWCOLORFORM CUANDO REESTRUCTURE
+PORQUE DESABILITE EL NEWCOLORFORM, YA QUE QUE EN LA VERSION ANTERIOR NEWPALETTEFORM ERA UNA FUNCION, 
+AHORA ES UNA CLASE, DE TODAS FORMAS MAS ADELANTA UTILIZARE NEWCOLORFORM CUANDO REESTRUCTURE
 
 */}
 {/* <NewColorForm /> // en vez de todo el div de abajo*/}
@@ -228,29 +207,11 @@ class PersistentDrawerLeft extends React.Component {
                     {paletteIsFull ? 'Palette Full':'Random Color'}
                 </Button>
                 </div>
-                <ChromePicker
-                color={this.state.currentColor}
-                onChangeComplete={this.updateCurrentColor} // Si aqui no hago this.setState(...), el ChromePicker no funciona, ni idea
+                <ColorPickerForm 
+                paletteIsFull={paletteIsFull}
+                addNewColor={this.addNewColor}
+                colors={colors}
                 />
-                <ValidatorForm onSubmit={this.addNewColor}>
-                    <TextValidator 
-                    value={this.state.newColorName}
-                    name='newColorName'
-                    onChange={this.handleChange}
-                    validators={['required', 'isColorNameUnique', 'isColorUnique']}
-                    errorMessages={['Enter a color name', 'This name is already used', 'Color already used']}
-                    />
-                    <Button 
-                    variant='contained' 
-                    color='primary' 
-                    style={{backgroundColor: this.state.currentColor}}
-                    // onClick={this.addNewColor}
-                    type='submit'
-                    disabled={paletteIsFull}
-                    >
-                        {paletteIsFull ? 'Palette Full':'Add Color'}
-                    </Button> 
-                </ValidatorForm> 
             </div>
 {/* 
 
