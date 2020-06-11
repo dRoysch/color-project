@@ -6,8 +6,33 @@ import Button from '@material-ui/core/Button'
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 
 
+import { withStyles } from '@material-ui/core/styles';
 
-export default class ColorPickerForm extends Component {
+
+
+const styles = {
+    picker: {
+        width: '100% !important',
+        marginTop: '2rem'
+    },
+    addColor: {
+        width: '100%',
+        padding: '1rem',
+        marginTop: '1rem',
+        fontSize: '2rem'
+    },
+    inputText: {
+        width: '100%',
+        marginTop: '0.5rem',
+        height: '75px'
+    },
+    resize : {
+        fontSize: '1.5rem',
+        textAlign: 'center'
+    }
+}
+
+class ColorPickerForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -50,16 +75,26 @@ export default class ColorPickerForm extends Component {
     }
 
     render() {
-        const {paletteIsFull} = this.props;
+        const {paletteIsFull, classes} = this.props;
         const {currentColor, newColorName}= this.state;
         return (
             <div>
                 <ChromePicker
                 color={currentColor}
                 onChangeComplete={this.updateCurrentColor} // Si aqui no hago this.setState(...), el ChromePicker no funciona, ni idea
+                className={classes.picker}
                 />
                 <ValidatorForm onSubmit={this.handleSubmit}>
                     <TextValidator 
+                    InputProps={{
+                        classes: {
+                            input: classes.resize,
+                        },
+                    }}
+                    className={classes.inputText}
+                    margin='normal'
+                    variant='filled'
+                    placeholder='Color Name'
                     value={newColorName}
                     name='newColorName'
                     onChange={this.handleChange}
@@ -70,6 +105,7 @@ export default class ColorPickerForm extends Component {
                     variant='contained' 
                     color='primary' 
                     style={{backgroundColor: this.state.currentColor}}
+                    className={classes.addColor}
                     // onClick={this.addNewColor}
                     type='submit'
                     disabled={paletteIsFull}
@@ -81,3 +117,4 @@ export default class ColorPickerForm extends Component {
         )
     }
 }
+export default withStyles(styles)(ColorPickerForm);

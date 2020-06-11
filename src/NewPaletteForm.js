@@ -55,7 +55,25 @@ const styles = theme => ({
     }),
     marginLeft: 0,
   },
+  container: {
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  buttons: {
+    width: '90%',
+    display: 'flex',
+    justifyContent: 'space-between'
+
+  },
+  button: {
+    width: '48%'
+  }
 });
+// Carlos Rojas equipo general de generacion
 
 class PersistentDrawerLeft extends React.Component {
   static defaultProps = {
@@ -164,23 +182,18 @@ class PersistentDrawerLeft extends React.Component {
           </div>
           <Divider />
 
-{/*  
-
-PORQUE DESABILITE EL NEWCOLORFORM, YA QUE QUE EN LA VERSION ANTERIOR NEWPALETTEFORM ERA UNA FUNCION, 
-AHORA ES UNA CLASE, DE TODAS FORMAS MAS ADELANTA UTILIZARE NEWCOLORFORM CUANDO REESTRUCTURE
-
-*/}
-{/* <NewColorForm /> // en vez de todo el div de abajo*/}
-          <div>
-                <Typography variant='h4'>Design Your Palette</Typography>
-                <div>
+          <div className={classes.container}>
+                <Typography variant='h4' gutterBottom>Design Your Palette</Typography>
+                <div className={classes.buttons}>
                 <Button 
+                className={classes.button}
                 variant='contained' 
                 color='primary' 
                 onClick={this.clearColors}>
                     Clear Palette
                 </Button>
                 <Button 
+                className={classes.button}
                 variant='contained' 
                 color='primary' 
                 onClick={this.addRandomColor}
