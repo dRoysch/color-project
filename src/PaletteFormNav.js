@@ -58,13 +58,17 @@ const styles = theme => ({
 class PaletteFormNav extends Component {
     constructor(props) {
         super(props);
-        this.state = {newPaletteName: '', formShowing: true}
+        this.state = {newPaletteName: '', formShowing: false}
         this.showForm = this.showForm.bind(this);
+        this.hideForm = this.hideForm.bind(this);
+
     }
     showForm() {
       this.setState({formShowing: true});
     }
-
+    hideForm() {
+      this.setState({formShowing: false});
+    }
 
 
     render() {
@@ -100,15 +104,18 @@ class PaletteFormNav extends Component {
                       Go Back
                     </Button>
                   </Link>
-                  <Button variant="contained" color="primary" onClick={this.showForm} className={classes.button}>
+                  <Button 
+                  variant="contained" 
+                  color="primary" 
+                  onClick={this.showForm} 
+                  className={classes.button}>
                     Save Palette
                   </Button>
                 </div>
               </AppBar>
-              {this.state.formShowing &&
-                  (<PaletteMetaForm palettes={palettes} handleSubmit={handleSubmit}/>)
-
-              }
+              {this.state.formShowing && (
+              <PaletteMetaForm palettes={palettes} handleSubmit={handleSubmit} hideForm={this.hideForm}/>
+              )}
             </div>
         )
     }
