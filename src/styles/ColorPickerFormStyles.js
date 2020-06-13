@@ -1,18 +1,30 @@
 const styles = {
+    container: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        width: '100%',
+        '& form': {
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            width: '100%'
+        }
+    },
     picker: {
-        width: '100% !important',
+        width: '95% !important',
         marginTop: '2rem'
     },
     addColor: {
-        width: '100%',
+        width: '95%',
         padding: '1rem',
-        marginTop: '1rem',
+        marginTop: '0.5rem',
         fontSize: '2rem'
     },
     inputText: {
-        width: '100%',
+        width: '95%',
         marginTop: '0.5rem',
-        height: '75px'
+        height: '75px',
     },
     resize : {
         fontSize: '1.5rem',
