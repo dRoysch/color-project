@@ -10,9 +10,11 @@ import NewPaletteForm from './NewPaletteForm.js';
 class App extends Component {
   constructor(props){
     super(props);
-    this.state = { palettes: seedPalette };
+    const savedPalettes = JSON.parse(window.localStorage.getItem('palettes'));
+    this.state = { palettes: savedPalettes || seedPalette };
     this.savePalette = this.savePalette.bind(this);
     this.findPalette = this.findPalette.bind(this);
+    this.syncLocalStorage = this.syncLocalStorage.bind(this);
   }
   findPalette(id){
     return this.state.palettes.find(function(palette){
@@ -20,7 +22,17 @@ class App extends Component {
     })
   }
   savePalette(newPalette){
-    this.setState({palettes: [...this.state.palettes, newPalette]});
+    this.setState(
+      {palettes: [...this.state.palettes, newPalette]}, 
+      this.syncLocalStorage
+      );
+    // Si aqui llamo this.syncLocalStorage() estara bien, pero no hay garantias de que la
+    // linea de arriba <<this.setState({palettes: [...this.state.palettes, newPalette]});>> se realice completa antes de guardar en localStorage, es por eso que usamos un callback o un async
+    }
+  syncLocalStorage(){
+    window.localStorage.setItem(
+      'palettes',
+      JSON.stringify(this.state.palettes));
   }
   render(){
   return (
