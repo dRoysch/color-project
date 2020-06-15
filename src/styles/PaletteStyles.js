@@ -1,13 +1,13 @@
+import sizes from './sizes';
 export default {
     goBack: {
         width: '20%',
-        height: props => (props.showingFullPalette ? '25%' : '50%'),
+        height: '50%',
         margin: '0 auto',
         display: 'inline-block',
         position: 'relative',
         cursor: 'pointer',
-        // marginBottom: '-5px',
-        marginBottom: '0px',
+        marginBottom: '-4px',
         opacity: 1,
         backgroundColor: 'black',
         "& a": {
@@ -28,6 +28,18 @@ export default {
             textTransform: 'uppercase',
             border: 'none',
             textDecoration: 'none'
+        },
+        [sizes.down('lg')]: {
+            width: '25%',
+            height: '33.3333%'
+        },
+        [sizes.down('md')]: {
+            width: '50%',
+            height: '20%'
+        },
+        [sizes.down('xs')]: {
+            width: '100%',
+            height: '10%'
         }
 
     },
@@ -37,7 +49,7 @@ export default {
         flexDirection: 'column',
     },
     paletteColors: {
-        height: '100%'
+        height: '90vh'
     },
     SingleColorPalette: {
         height: '100vh'
