@@ -1,4 +1,4 @@
-
+import sizes from './sizes';
 export default {
     '@import': 
         ["url(https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap)"],
@@ -40,7 +40,16 @@ export default {
             width: '15px',
             height: '15px',
             marginTop: '-5px'
+        },
+        [sizes.down('xs')]: {
+            width: '70%'
+        },
+        [sizes.down('md')]: {
+            width: '50%'
         }
+    },
+    sliderDiv: {
+        width: '100%',
     },
     selectContainer: {
             marginLeft: 'auto',

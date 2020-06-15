@@ -40,7 +40,7 @@ closeSnackbar(){
                 </div>
                 {
                 showingAllColors && 
-                <div>
+                <div className={classes.sliderDiv}>
                     <span>Level: {level}</span>
                     <div className={classes.slider}>
                     <Slider
