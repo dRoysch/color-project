@@ -6,7 +6,7 @@ export default {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        height: '6vh'
+        height: '5%'
     },
     logo: {
         marginRight: '2%',

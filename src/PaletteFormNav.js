@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 
 import PaletteMetaForm from './PaletteMetaForm.js';
 import Button from '@material-ui/core/Button'
-import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import { Link } from 'react-router-dom';
 
 import classNames from 'classnames';
@@ -36,7 +35,6 @@ class PaletteFormNav extends Component {
 
     render() {
         const { classes, open, palettes, handleSubmit } = this.props;
-        const { newPaletteName } = this.state;
         return (
             <div className={classes.root}>
               <CssBaseline />

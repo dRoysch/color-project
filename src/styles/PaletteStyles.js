@@ -6,7 +6,8 @@ export default {
         display: 'inline-block',
         position: 'relative',
         cursor: 'pointer',
-        marginBottom: '-5px',
+        // marginBottom: '-5px',
+        marginBottom: '0px',
         opacity: 1,
         backgroundColor: 'black',
         "& a": {
@@ -36,7 +37,7 @@ export default {
         flexDirection: 'column',
     },
     paletteColors: {
-        height: '90%'
+        height: '100%'
     },
     SingleColorPalette: {
         height: '100vh'
