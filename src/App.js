@@ -51,7 +51,7 @@ class App extends Component {
         <CSSTransition 
         key={location.key} 
         classNames='page' 
-        timeout={500}>
+        timeout={300}>
           <Switch location={location}>
             <Route
             exact

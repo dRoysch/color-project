@@ -16,9 +16,6 @@ import {arrayMove} from 'react-sortable-hoc';
 
 import styles from './styles/NewPaletteFormStyles';
 
-
-// Carlos Rojas equipo general de generacion
-
 class PersistentDrawerLeft extends React.Component {
   static defaultProps = {
     maxColors: 20
