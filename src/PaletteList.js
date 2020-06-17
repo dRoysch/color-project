@@ -37,7 +37,7 @@ class PaletteList extends Component {
         this.setState({openDeleteDialog: false, deletingId: ''})
     }
     handleDelete(){
-        this.props.delePalette(this.state.deletingId);
+        this.props.deletePalette(this.state.deletingId);
         this.closeDialog();
     }
     goToPalette(id){
