@@ -3,7 +3,6 @@ import Button from '@material-ui/core/Button'
 import DraggableColorList from './DraggableColorList.js';
 import PaletteFormNav from './PaletteFormNav.js'
 import ColorPickerForm from './ColorPickerForm.js';
-
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
@@ -13,8 +12,8 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import {arrayMove} from 'react-sortable-hoc';
-
 import styles from './styles/NewPaletteFormStyles';
+import seedPalette from './seedPalette';
 
 class PersistentDrawerLeft extends React.Component {
   static defaultProps = {
@@ -24,7 +23,7 @@ class PersistentDrawerLeft extends React.Component {
         super(props);
         this.state= {
             newColorName: '',
-            colors: this.props.palettes[0].colors
+            colors: seedPalette[0].colors
         }
         this.addNewColor = this.addNewColor.bind(this);
         this.handleChange = this.handleChange.bind(this);

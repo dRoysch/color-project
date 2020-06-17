@@ -59,7 +59,7 @@ class ColorPickerForm extends Component {
                 onChangeComplete={this.updateCurrentColor} // Si aqui no hago this.setState(...), el ChromePicker no funciona, ni idea
                 className={classes.picker}
                 />
-                <ValidatorForm onSubmit={this.handleSubmit}>
+                <ValidatorForm onSubmit={this.handleSubmit} instantValidate={false}>
                     <TextValidator 
                     InputProps={{
                         classes: {
