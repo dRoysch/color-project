@@ -85,12 +85,17 @@ class PersistentDrawerLeft extends React.Component {
     let rand;
     let randomColor;
     let isDuplicatedColor = true;
+    let a = 0;
     while(isDuplicatedColor) {
+      a = a + 1;
       rand = Math.floor(Math.random() * allColors.length);
       randomColor = allColors[rand];
       isDuplicatedColor = this.state.colors.some(
         color => color.name === randomColor.name
       );
+      if (a >= 10){
+        isDuplicatedColor = false;
+      }
     }
     this.setState({colors: [...this.state.colors, randomColor]});
     }
